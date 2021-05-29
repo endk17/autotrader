@@ -1,4 +1,5 @@
-import config, sqlite3
+from db import config
+import sqlite3
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 
