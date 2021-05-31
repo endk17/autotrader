@@ -5,3 +5,5 @@ uvicorn
 jinja2
 aiofiles
 python-multipart
+backtrader
+pandas
