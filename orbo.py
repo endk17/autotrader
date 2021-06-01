@@ -1,8 +1,8 @@
 from main import strategy
 from db import config
 import sqlite3
-from datetime import date, timedelta, tzinfo
-import pytz
+from datetime import date, datetime, timedelta, tzinfo
+from timezone import is_dst
 
 import alpaca_trade_api as tradeapi
 from alpaca_trade_api.rest import TimeFrame
@@ -33,11 +33,18 @@ print(symbols)
 api = tradeapi.REST(config.API_KEY, config.SECRET_KEY, config.API_URL, api_version='v2')
 
 current_date = '2021-05-28'
-start_minute_bar = f"{current_date}T09:30:00-05:00"
-end_minute_bar = f"{current_date}T09:45:00-05:00"
+if is_dst():
+    # current_date = datetime.today().isoformat()
+    start_minute_bar = f"{current_date}T09:30:00-05:00"
+    end_minute_bar = f"{current_date}T09:45:00-05:00"
+else:
+    # current_date = datetime.today().isoformat()
+    start_minute_bar = f"{current_date}T09:30:00-04:00"
+    end_minute_bar = f"{current_date}T09:45:00-04:00"
+
 
 orders = api.list_orders(status='all', limit=500, after=f"{current_date}T09:30:00-05:00)")
-existing_order_symbols = [order.symbol for order in orders]
+existing_order_symbols = [order.symbol for order in orders if orders.status != 'canceled']
 
 print(
     start_minute_bar,
@@ -81,20 +88,23 @@ for symbol in symbols:
                 print(f"placing order for {symbol} at {limit_price}, closed_above {opening_range_high} at {after_opening_range_breakout.iloc[0]['close']}")
 
                 # submit order
-                api.submit_order(
-                    symbol='symbol',
-                    side='buy',
-                    type='limit',
-                    qty='100',
-                    time_in_force='day',
-                    order_class='bracket',
-                    take_profit=dict(
-                        limit_price=limit_price + opening_range,
-                    ),
-                    stop_loss=dict(
-                        stop_price=limit_price - opening_range,
-                        limit_price=limit_price,
+                try:
+                    api.submit_order(
+                        symbol='symbol',
+                        side='buy',
+                        type='limit',
+                        qty='100',
+                        time_in_force='day',
+                        order_class='bracket',
+                        take_profit=dict(
+                            limit_price=limit_price + opening_range,
+                        ),
+                        stop_loss=dict(
+                            stop_price=limit_price - opening_range,
+                            limit_price=limit_price,
+                        )
                     )
-                )
+                except Exception as e:
+                    print(f"could not submit order {e}")
             else:
-                print(f"Open order for {symbol} exists , skipping place order!!")
+                print(f"Buy order for {symbol} exists, skipping place order!!")
