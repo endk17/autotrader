@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
     <h1><a href="/">Stocks </a> 
         <i class="angle double right icon"></i>
         {{ stock.name }}
@@ -11,11 +10,6 @@
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
             <div id="tradingview_21f43"></div>
-            <div class="tradingview-widget-copyright">
-                <a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank">
-                    <span class="blue-text">AAPL Chart</span>
-                </a> by TradingView
-            </div>
             <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
             <script type="text/javascript">
             new TradingView.widget(
