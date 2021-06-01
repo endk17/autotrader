@@ -7,3 +7,6 @@ aiofiles
 python-multipart
 backtrader
 pandas
+pytz
+tulipy
+numpy
