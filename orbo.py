@@ -3,6 +3,7 @@ from db import config
 import sqlite3
 from datetime import date, datetime, timedelta, tzinfo
 from timezone import is_dst
+from helpers import calc_qty
 
 import alpaca_trade_api as tradeapi
 from alpaca_trade_api.rest import TimeFrame
@@ -93,7 +94,7 @@ for symbol in symbols:
                         symbol='symbol',
                         side='buy',
                         type='limit',
-                        qty='100',
+                        qty=calc_qty(limit_price),
                         time_in_force='day',
                         order_class='bracket',
                         take_profit=dict(
