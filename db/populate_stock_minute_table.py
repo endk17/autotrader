@@ -15,7 +15,7 @@ api = tradeapi.REST(config.API_KEY, config.SECRET_KEY, config.API_URL)
 symbols = []
 stock_ids = {}
 
-with open('./db/qqq.csv') as f:
+with open('./db/101.csv') as f:
     reader = csv.reader(f)
 
     for line in reader:
@@ -32,7 +32,7 @@ for stock in stocks:
     stock_ids[symbol] = stock['id']
     
 for symbol in symbols:
-    start_date = datetime(2021, 5, 3).date()
+    start_date = datetime(2020, 1, 6).date()
     end_date_range = datetime(2021, 5, 28).date()
 
     while start_date < end_date_range:

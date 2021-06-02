@@ -89,7 +89,7 @@ for symbol in symbols:
                 # messages.append(message)
 
                 print(message)
-
+                
                 try:
                     # submit order
                     api.submit_order(

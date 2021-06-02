@@ -47,11 +47,10 @@ else:
 orders = api.list_orders(status='all', limit=500, after=f"{current_date}T09:30:00-05:00)")
 existing_order_symbols = [order.symbol for order in orders if orders.status != 'canceled']
 
-print(
-    start_minute_bar,
-    end_minute_bar,
-)
-
+# print(
+#     start_minute_bar,
+#     end_minute_bar,
+# )
 
 for symbol in symbols:
 
@@ -68,17 +67,17 @@ for symbol in symbols:
         opening_range_low = opening_range_bars['low'].min()
         opening_range_high = opening_range_bars['high'].max()
         opening_range = opening_range_high - opening_range_low
-        print(
-            opening_range_low,
-            opening_range_high,
-            opening_range 
-        )
+        # print(
+        #     opening_range_low,
+        #     opening_range_high,
+        #     opening_range 
+        # )
 
         after_opening_range_mask = minute_bars.index >= end_minute_bar
         after_opening_range_bars = minute_bars.loc[after_opening_range_mask]
-        print(
-            after_opening_range_bars
-        )
+        # print(
+        #     after_opening_range_bars
+        # )
 
         after_opening_range_breakout = after_opening_range_bars[after_opening_range_bars['close'] > opening_range_high]
 
@@ -86,10 +85,13 @@ for symbol in symbols:
             if symbol not in existing_order_symbols:
                 limit_price = after_opening_range_breakout.iloc[0]['close']
                 
-                print(f"placing order for {symbol} at {limit_price}, closed_above {opening_range_high} at {after_opening_range_breakout.iloc[0]['close']}")
+                message = (f"buying long {symbol} at {limit_price}, closed_above {opening_range_high} at {after_opening_range_breakout.iloc[0]['close']}")
+                # messages.append(message)
 
-                # submit order
+                print(message)
+                
                 try:
+                    # submit order
                     api.submit_order(
                         symbol='symbol',
                         side='buy',

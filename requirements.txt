@@ -10,3 +10,4 @@ pandas
 pytz
 tulipy
 numpy
+backtrader

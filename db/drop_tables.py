@@ -21,4 +21,8 @@ cursor.execute("""
     DROP TABLE stock_strategy
 """)
 
+cursor.execute("""
+    DROP TABLE stock_price_minute
+""")
+
 connection.commit()
