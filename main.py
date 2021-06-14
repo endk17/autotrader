@@ -170,15 +170,14 @@ def strategy(request: Request,strategy_id):
 
     return templates.TemplateResponse("strategy.html", {"request": request, "stocks": stocks, "strategy": strategy})
 
-
     if stock_filter == 'new_closing_highs':
         cursor.execute("""
-        select * from (
-            select symbol, name, stock_id, max(close), date 
-            from stock_price join stock on stock.id = stock_price.stock_id 
-            group by stock_id
-            order by symbol
-        ) where date = (select max(date) from stock_price)
+            select * from (
+                select symbol, name, stock_id, max(close), date 
+                from stock_price join stock on stock.id = stock_price.stock_id 
+                group by stock_id
+                order by symbol
+            ) where date = (select max(date) from stock_price)
         """)
 
 @app.get("/strategies")
