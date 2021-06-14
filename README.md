@@ -13,3 +13,12 @@ The primary components of this application are:
 - [Jinja2](https://jinja.palletsprojects.com/en/3.0.x/)
 
 For a more detailed list please see the [requirements text file](./requirements.txt)
+
+
+## Strategy(s)
+
+1. Opening Range Breakout (15 Minute Candle)
+
+2. Opening Range Breakdown (15 Minute Candle)
+
+__The definition used to explain these strategies was taking from [Warrior Trading](https://www.warriortrading.com/opening-range-breakout/) as this definition was then used  as a premise to devise the codified solution__
