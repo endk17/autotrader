@@ -21,4 +21,4 @@ For a more detailed list please see the [requirements text file](./requirements.
 
 2. Opening Range Breakdown (15 Minute Candle)
 
-__The definition used to explain these strategies was taking from [Warrior Trading](https://www.warriortrading.com/opening-range-breakout/) and this definition was then used  as a premise to devise the codified solution__
+__The definition used to explain these strategies was taking from [Warrior Trading](https://www.warriortrading.com/opening-range-breakout/) and this definition was then used as the founding premise to codify the solution__
